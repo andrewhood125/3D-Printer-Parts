@@ -1,19 +1,21 @@
 
-// This is the final J-Head model
+// This is the final J-Head model assembly
 module jhead()
 {
-	translate([0, 20, -21])
-	difference()
-	{
-		cylinder(51, 8, 8);
-		jhead_collar();
+	translate([0, 20, -8]) {
+		difference()
+		{
+			cylinder(38, 8, 8);
+			jhead_collar();
+		}
+		translate([0, 0, -4]) jhead_nozzle();
 	}
 }
 
 // This created the inset near the top of theJ-Head
 module jhead_collar()
 {
-		translate([0, 0, 41.7]) 
+		translate([0, 0, 28.7]) 
 		difference()
 		{
 			cylinder(4.5, 8, 8);
@@ -21,6 +23,15 @@ module jhead_collar()
 		}
 		
 }
+
+module jhead_nozzle()
+{
+	cube([12.5, 12.5, 8], center = true);
+}
+
+
+
+
 
 // This provides a set of screws with the heads at the correct location
 // for the prusa3 vanilla x-carraiage
@@ -62,6 +73,10 @@ module extruder_block()
 	}
 }
 
+extruder_support_air_inlets()
+{
+
+}
 
 module extruder_block_back()
 {
@@ -94,17 +109,18 @@ module andrews_bowden_extruder()
 	}
 	
 
-	difference()
-	{
-		extruder_block_front();
-		3mm_screws();
-		jhead();
-		compression_fitting();
-	}
+	//difference()
+//	{
+//		extruder_block_front();
+//		3mm_screws();
+//		jhead();
+//		compression_fitting();
+//	}
 	
 }
 
 
 
 
+jhead();
 andrews_bowden_extruder();
